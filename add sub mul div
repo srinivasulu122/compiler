@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main() {
+    double a = 3, b = 4, c = 2;
+    double result;
+    printf("enter the expression:");
+    scanf("%d",& result);
+
+    result = a + b * c; 
+    printf("Result of a + b * c: %.2lf\n", result);
+
+    result = (a + b) * c; 
+    printf("Result of (a + b) * c: %.2lf\n", result);
+
+    return 0;
+}
