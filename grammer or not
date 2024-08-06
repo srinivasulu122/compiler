@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <string.h>
+
+bool isIdentifier(char *str) {
+    if (!isalpha(str[0]))
+        return false;
+
+    for (int i = 1; str[i] != '\0'; i++) {
+        if (!isalnum(str[i]))
+            return false;
+    }
+    return true;
+}
+
+bool isValidExpression(char *str) {
+    char id1[20], id2[20], op;
+    int pos = 0, i = 0;
+
+    while (isalpha(str[pos])) {
+        id1[i++] = str[pos++];
+    }
+    id1[i] = '\0';
+
+    if (str[pos] == '+' || str[pos] == '-' || str[pos] == '*' || str[pos] == '/') {
+        op = str[pos++];
+    } else {
+        return false;
+    }
+
+    i = 0;
+    while (isalnum(str[pos])) {
+        id2[i++] = str[pos++];
+    }
+    id2[i] = '\0';
+
+    return str[pos] == '\0' && isIdentifier(id1) && isIdentifier(id2);
+}
+
+int main() {
+    char input[50];
+
+    printf("Enter an expression terminated by $: ");
+    scanf("%s", input);
+
+    input[strlen(input) - 1] = '\0';
+
+    if (isValidExpression(input)) {
+        printf("The given input string satisfies the grammar.\n");
+    } else {
+        printf("The given input string does not satisfy the grammar.\n");
+    }
+
+    return 0;
+}
+
+
+output:
+Enter an expression terminated by $: a+b$
