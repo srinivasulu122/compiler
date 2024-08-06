@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int main() {
+    char str[100];
+    int i, length = 0, words = 0;
+    int in_word = 0;
+
+    printf("Enter any string:\n");
+    fgets(str, sizeof(str), stdin);
+
+    length = strlen(str) - 1; 
+    for (i = 0; i < length; i++) {
+        if (isspace(str[i])) {
+            if (in_word) {
+                in_word = 0;
+                words++;
+            }
+        } else {
+            in_word = 1;
+        }
+    }
+    if (in_word) words++; 
+
+    printf("The number of characters in the string are %d\n", length);
+    printf("The number of words in the string are %d\n", words);
+
+    return 0;
+}
